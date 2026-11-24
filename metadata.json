@@ -1,0 +1,6 @@
+{
+  "name": "Srabone",
+  "description": "Romantic animated photo showcase featuring Heart Bloom petals, interactive Love centerpiece, smooth slideshows, and background song playback.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

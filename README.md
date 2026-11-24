@@ -1,11 +1,19 @@
-<div align="center">
+# Srabone
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+A luxury animated photo memory showcase Android application built with Kotlin, Jetpack Compose, Material 3, and Coil.
 
-  <h1>Built with AI Studio</h2>
+## Features
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+- **Photo-Free Animated Home Screen**: Deep velvet rose-gold atmospheric backdrop with floating sparkles, interactive heartbeat lotus centerpiece, **Heart Bloom**, and **Love** entry modes.
+- **4 Live Showcase Animations**: Switch seamlessly between **Heart Bloom**, **Love Slide**, **Velvet Fade**, and **Memory Card** transitions with slow Ken Burns motion.
+- **Synchronized Background Music**: Automatically starts playing *Dilruba Dilnasheen* as background audio when photos begin showcasing, pauses cleanly on lifecycle pause, and stops when returning to Home.
+- **Interactive Gestures**: Swipe left/right to browse, single-tap for immersive fullscreen, and double-tap anywhere for a heart-burst reaction that saves favorites.
+- **Bilingual Support**: Instant switching between English and Bangla (`EN / বাংলা`).
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Tech Stack
 
-</div>
+- Kotlin & Jetpack Compose (Material 3, Navigation Compose)
+- Custom `Canvas` particle & heart-bloom animations
+- Android `MediaPlayer` with lifecycle-aware fade-in audio control
+- Coil for high-resolution bundled asset preloading
+- Jetpack DataStore for preferences & favorites persistence
