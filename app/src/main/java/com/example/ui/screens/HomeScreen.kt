@@ -415,22 +415,39 @@ fun HomeScreen(
 
                     Spacer(Modifier.height(10.dp))
 
-                    // Bottom poetic whisper
-                    AnimatedContent(
-                        targetState = whispers[whisperIndex],
-                        transitionSpec = {
-                            fadeIn(tween(700)) togetherWith fadeOut(tween(500))
-                        },
-                        label = "whisper_fade"
-                    ) { whisperText ->
+                    // Bottom poetic whisper & designer credit
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(6.dp),
+                        modifier = Modifier.padding(top = 4.dp, bottom = 2.dp)
+                    ) {
+                        AnimatedContent(
+                            targetState = whispers[whisperIndex],
+                            transitionSpec = {
+                                fadeIn(tween(700)) togetherWith fadeOut(tween(500))
+                            },
+                            label = "whisper_fade"
+                        ) { whisperText ->
+                            Text(
+                                text = "“$whisperText”",
+                                fontFamily = PlayfairDisplayFontFamily,
+                                fontStyle = FontStyle.Italic,
+                                fontSize = 13.sp,
+                                color = MutedRose.copy(alpha = 0.85f),
+                                textAlign = TextAlign.Center
+                            )
+                        }
+
                         Text(
-                            text = "“$whisperText”",
-                            fontFamily = PlayfairDisplayFontFamily,
-                            fontStyle = FontStyle.Italic,
-                            fontSize = 13.sp,
-                            color = MutedRose.copy(alpha = 0.85f),
+                            text = strings.designCredit,
+                            style = MaterialTheme.typography.labelMedium.copy(
+                                fontSize = 11.sp,
+                                letterSpacing = 1.4.sp,
+                                fontWeight = FontWeight.Medium
+                            ),
+                            color = ChampagneGold.copy(alpha = 0.78f),
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(vertical = 4.dp)
+                            modifier = Modifier.testTag("home_design_credit")
                         )
                     }
                 }

@@ -70,6 +70,8 @@ class HeartBloomTest {
         assertEquals("Srabone", bn.appTitle)
         assertEquals("Heart Bloom", en.heartBloomTitle)
         assertEquals("Love", en.loveTitle)
+        assertEquals("Design by Shajamal", en.designCredit)
+        assertEquals("Design by Shajamal", bn.designCredit)
         assertTrue(bn.heartBloomTitle.isNotBlank())
         assertTrue(bn.loveTitle.isNotBlank())
     }

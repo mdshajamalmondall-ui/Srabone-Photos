@@ -320,7 +320,15 @@ fun PreferencesBottomSheet(
                 }
             }
 
-            Spacer(Modifier.height(8.dp))
+            Text(
+                text = strings.designCredit,
+                style = MaterialTheme.typography.labelMedium,
+                color = ChampagneGold.copy(alpha = 0.72f),
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(top = 4.dp, bottom = 8.dp)
+                    .testTag("sheet_design_credit")
+            )
         }
     }
 }
