@@ -15,6 +15,7 @@ import androidx.compose.material.icons.rounded.AutoAwesome
 import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material.icons.rounded.Language
 import androidx.compose.material.icons.rounded.MusicNote
+import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material.icons.rounded.Speed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
@@ -50,6 +51,7 @@ fun PreferencesBottomSheet(
     onSelectParticleDensity: (ParticleDensity) -> Unit,
     onSelectBackgroundMusic: (Boolean) -> Unit,
     onSelectLanguage: (AppLanguage) -> Unit,
+    onShareApp: () -> Unit,
     onClearFavorites: () -> Unit
 ) {
     val strings = LocalAppStrings.current
@@ -275,6 +277,27 @@ fun PreferencesBottomSheet(
                         )
                     }
                 }
+            }
+
+            OutlinedButton(
+                onClick = {
+                    onDismiss()
+                    onShareApp()
+                },
+                border = BorderStroke(1.dp, ChampagneGold.copy(alpha = 0.5f)),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("share_app_button")
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.Share,
+                    contentDescription = null,
+                    tint = ChampagneGold
+                )
+                Text(
+                    text = "  ${strings.shareAppLabel}",
+                    color = ChampagneGold
+                )
             }
 
             if (preferences.favoriteIds.isNotEmpty()) {

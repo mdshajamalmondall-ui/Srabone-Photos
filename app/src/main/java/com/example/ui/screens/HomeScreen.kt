@@ -39,6 +39,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AutoAwesome
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FilterVintage
+import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material.icons.rounded.Shuffle
 import androidx.compose.material.icons.rounded.Tune
 import androidx.compose.material3.Icon
@@ -92,6 +93,7 @@ fun HomeScreen(
     onOpenMagicShuffle: () -> Unit,
     onOpenFavorites: () -> Unit,
     onToggleLanguage: () -> Unit,
+    onShareApp: () -> Unit,
     onOpenSettings: () -> Unit
 ) {
     val strings = LocalAppStrings.current
@@ -199,6 +201,26 @@ fun HomeScreen(
                                     color = ChampagneGold,
                                     modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp)
                                 )
+                            }
+
+                            Surface(
+                                shape = CircleShape,
+                                color = RoseGlass.copy(alpha = 0.72f),
+                                border = BorderStroke(1.dp, Color.White.copy(alpha = 0.14f))
+                            ) {
+                                IconButton(
+                                    onClick = {
+                                        performGentleHaptic()
+                                        onShareApp()
+                                    },
+                                    modifier = Modifier.testTag("home_share_button")
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Rounded.Share,
+                                        contentDescription = strings.shareAppCd,
+                                        tint = ChampagneGold
+                                    )
+                                }
                             }
 
                             Surface(

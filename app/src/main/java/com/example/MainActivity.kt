@@ -15,8 +15,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
@@ -28,7 +30,10 @@ import com.example.ui.components.PreferencesBottomSheet
 import com.example.ui.screens.HomeScreen
 import com.example.ui.screens.ShowcaseScreen
 import com.example.ui.theme.HeartBloomTheme
+import com.example.ui.theme.LocalAppStrings
 import com.example.ui.theme.ObsidianVelvet
+import com.example.util.AppShareHelper
+import kotlinx.coroutines.launch
 
 private object HeartBloomRoutes {
     const val HOME = "home"
@@ -56,12 +61,25 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun HeartBloomApp(viewModel: HeartBloomViewModel) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     val preferences by viewModel.preferences.collectAsStateWithLifecycle()
     val showcaseState by viewModel.showcaseState.collectAsStateWithLifecycle()
     val navController = rememberNavController()
     var showPreferencesSheet by remember { mutableStateOf(false) }
 
     HeartBloomTheme(language = preferences.language) {
+        val strings = LocalAppStrings.current
+        val triggerShareApp: () -> Unit = {
+            scope.launch {
+                AppShareHelper.shareInstalledApk(
+                    context = context,
+                    chooserTitle = strings.shareAppCd,
+                    shareMessage = strings.shareAppMessage
+                )
+            }
+        }
+
         NavHost(
             navController = navController,
             startDestination = HeartBloomRoutes.HOME,
@@ -106,6 +124,7 @@ private fun HeartBloomApp(viewModel: HeartBloomViewModel) {
                         navController.navigate(HeartBloomRoutes.SHOWCASE)
                     },
                     onToggleLanguage = viewModel::toggleLanguage,
+                    onShareApp = triggerShareApp,
                     onOpenSettings = { showPreferencesSheet = true }
                 )
             }
@@ -136,6 +155,7 @@ private fun HeartBloomApp(viewModel: HeartBloomViewModel) {
                 onSelectParticleDensity = viewModel::setParticleDensity,
                 onSelectBackgroundMusic = viewModel::setBackgroundMusicEnabled,
                 onSelectLanguage = viewModel::setLanguage,
+                onShareApp = triggerShareApp,
                 onClearFavorites = viewModel::clearAllFavorites
             )
         }
